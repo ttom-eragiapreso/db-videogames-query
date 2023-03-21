@@ -174,11 +174,26 @@ group by sh.id
 
 5- Selezionare i premi ricevuti da ogni software house per i videogiochi che ha prodotto (55)
 
-
+select *
+from videogames v 
+join award_videogame av on v.id = av.videogame_id 
+join awards a on a.id = av.award_id 
+;
 
 6- Selezionare categorie e classificazioni PEGI dei videogiochi che hanno ricevuto recensioni da 4 e 5 stelle, mostrandole una sola volta (3363)
 
+select DISTINCT v.id, c.id, pl.id
+from videogames v 
+join category_videogame cv on v.id = cv.videogame_id 
+join categories c on c.id = cv.category_id 
+join pegi_label_videogame plv on plv.videogame_id = v.id
+join pegi_labels pl on pl.id = plv.pegi_label_id 
+join reviews r on r.videogame_id = v.id 
+where r.rating >= 4
+;
+
 7- Selezionare quali giochi erano presenti nei tornei nei quali hanno partecipato i giocatori il cui nome inizia per 'S' (474)
+
 
 8- Selezionare le città in cui è stato giocato il gioco dell'anno del 2018 (36)
 
